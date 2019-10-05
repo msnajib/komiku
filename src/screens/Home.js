@@ -24,10 +24,6 @@ export default class Home extends Component {
     return (
       <SafeAreaView>
 
-        {this.state.data.map(item =>
-          <Text key={item.id}> {item.name} </Text>
-        )}
-
         <FlatList
           data={this.state.data}
           renderItem={({item}) => <Text> {item.name} </Text>}
