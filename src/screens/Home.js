@@ -1,35 +1,51 @@
 import React, { Component } from 'react'
 import { SafeAreaView, Text, FlatList } from 'react-native'
+import { connect } from 'react-redux'
+import * as actionTodos from './../redux/actions/actionTodos'
 
-export default class Home extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props)
+  }
 
-    this.state = {
-      data: [
-        { id: 1, name: 'Lucinta Luna' },
-        { id: 2, name: 'Lucinta Luci' },
-        { id: 3, name: 'Kuwe Luna' },
-        { id: 4, name: 'Lucinta Kamu' },
-        { id: 5, name: 'Kamu Cinta Luna' },
-        { id: 6, name: 'Sakarepmu Luna' },
-      ]
-    }
+  componentDidMount() {
+    this.props.handleGetTodos()
   }
 
 
   render() {
-
     return (
       <SafeAreaView>
 
         <FlatList
-          data={this.state.data}
-          renderItem={({item}) => <Text> {item.name} </Text>}
-          keyExtractor={item => item.id} />
+          data={this.props.todosLocal.todos}
+          renderItem={({ item }) => <Text> {item.name} </Text>}
+          keyExtractor={item => item.id}
+          style={{
+            padding: 20,
+            borderBottomWidth: 1,
+            borderColor: '#d1d8e0'
+          }} />
 
       </SafeAreaView>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todosLocal: state.todos
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleGetTodos: () => dispatch(actionTodos.handleGetTodos())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
