@@ -9,3 +9,8 @@ export const handleGetTodos = () => ({
     }
   ]
 });
+
+export const handleAddTodos = (params) => ({
+  type: types.ADD_TODOS,
+  payload: params
+});

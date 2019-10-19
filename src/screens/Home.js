@@ -7,10 +7,22 @@ class Home extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      name: 'Muhammad Rio'
+    }
   }
 
   componentDidMount() {
     this.props.handleGetTodos()
+  }
+
+  handleAdd = () => {
+    this.props.handleAddTodos(
+      {
+        id: 2,
+        name: this.state.name
+      }
+    )
   }
 
 
@@ -20,13 +32,15 @@ class Home extends Component {
 
         <FlatList
           data={this.props.todosLocal.todos}
-          renderItem={({ item }) => <Text> {item.name} </Text>}
-          keyExtractor={item => item.id}
-          style={{
-            padding: 20,
-            borderBottomWidth: 1,
-            borderColor: '#d1d8e0'
-          }} />
+          renderItem={({ item }) =>
+            <Text style={{
+              padding: 20,
+              borderBottomWidth: 1,
+              borderColor: '#d1d8e0'
+            }} > {item.name} </Text>}
+          keyExtractor={item => item.id} />
+
+        <Text onPress={this.handleAdd}>ADD TODO</Text>
 
       </SafeAreaView>
     )
@@ -41,7 +55,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleGetTodos: () => dispatch(actionTodos.handleGetTodos())
+    handleGetTodos: () => dispatch(actionTodos.handleGetTodos()),
+    handleAddTodos: (params) => dispatch(actionTodos.handleAddTodos(params))
   }
 }
 

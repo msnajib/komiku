@@ -11,6 +11,11 @@ export default function reducerTodos(state = initialState, action) {
         ...state,
         todos: action.payload
       };
+    case types.ADD_TODOS:
+      state.todos.push(action.payload)
+      return {
+        ...state
+      }
     default:
       return state;
   }
