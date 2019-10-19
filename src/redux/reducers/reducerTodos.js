@@ -16,6 +16,18 @@ export default function reducerTodos(state = initialState, action) {
       return {
         ...state
       }
+    case types.UPDATE_TODOS:
+      const updateData = state.todos.findIndex(item => item.id === action.payload.id)
+      state.todos[updateData] = action.payload
+      return {
+        ...state
+      }
+    case types.DELETE_TODOS:
+      const deleteData = state.todos.filter(item => item.id !== action.payload.id)
+      return {
+        ...state,
+        todos: deleteData
+      }
     default:
       return state;
   }

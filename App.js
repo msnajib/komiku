@@ -5,19 +5,19 @@ import { createReduxContainer } from 'react-navigation-redux-helpers';
 import RootNavigator from './src/navigator/RootNavigator'
 import { store } from './src/redux/store';
 
-// const AppNav = createReduxContainer(RootNavigator, 'root');
+const AppNav = createReduxContainer(RootNavigator, 'root');
 
-// const mapStateToProps = state => ({
-//   state: state.router
-// });
+const mapStateToProps = state => ({
+  state: state.router
+});
 
-// const AppWithNavigationState = connect(mapStateToProps)(AppNav);
+const AppWithNavigationState = connect(mapStateToProps)(AppNav);
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RootNavigator />
+        <AppWithNavigationState />
       </Provider>
     );
   }

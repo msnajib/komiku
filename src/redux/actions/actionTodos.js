@@ -14,3 +14,13 @@ export const handleAddTodos = (params) => ({
   type: types.ADD_TODOS,
   payload: params
 });
+
+export const handleUpdateTodos = (params) => ({
+  type: types.UPDATE_TODOS,
+  payload: params
+});
+
+export const handleDeleteTodos = (params) => ({
+  type: types.DELETE_TODOS,
+  payload: params
+});
